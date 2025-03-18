@@ -1,0 +1,253 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+    color: #eee;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/006/231/177/original/dark-blue-blurred-background-free-photo.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: auto; /* Hide horizontal scrollbar */
+    ;
+}
+
+/* Add subtle animation to the background image */
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 2% 2%; } /* Slight shift for parallax */
+    100% { background-position: 0% 0%; }
+}
+
+body {
+    animation: backgroundAnimation 30s linear infinite;
+    position: relative; /* Needed for sparkle animation */
+    overflow: auto; /* Keep sparkles within header bounds */
+}
+
+/* Sparkle animation */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkleAnimation 2s infinite;
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+    animation-delay: calc(var(--delay) * 1s);
+}
+
+@keyframes sparkleAnimation {
+    0% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    margin: 0 15px;
+    animation: gentleFloat 6s infinite ease-in-out alternate;
+}
+
+@keyframes gentleFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+nav a {
+    text-decoration: none;
+    color: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    background-color: #74b9ff;
+    color: #222;
+    transform: scale(1.1) rotate(10deg);
+    animation: none;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.5s ease forwards;
+    animation-delay: calc(var(--section-delay) * 0.3s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    margin-bottom: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #fff; /* White headings */
+}
+
+/* Add more styles as needed */
+
+.interaction {
+    margin-top: 20px;
+}
+
+.like-button, .comment-button {
+    transition: transform 0.3s ease;
+    padding: 8px 16px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.comment-list li {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+
+#registration-form {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-bottom: 20px; /* Add some space below the form */
+    border-radius: 8px;
+    text-align: center; /* Center the form elements */
+}
+
+#regForm input[type="text"],
+#regForm input[type="email"],
+#regForm input[type="password"] {
+    width: calc(100% - 22px); /* Adjust width for padding and border */
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#regForm button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.neuron-container {
+    display: flex;
+    justify-content: center; /* Center the neurons horizontally */
+    margin-top: 20px; /* Add some space above */
+}
+
+.neuron {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #999;
+    margin: 0 10px;
+    animation: pulse 2s infinite alternate;
+    position: relative; /* Add relative positioning */
+    overflow: visible; /* Ensure connections are visible */
+}
+
+.neuron::before,
+.neuron::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(153, 153, 153, 0.5); /* Semi-transparent gray */
+    width: 60px; /* Adjust connection length */
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    animation: connect 2s infinite alternate; /* Add connection animation */
+}
+
+
+.neuron::before {
+    left: 100%; /* Connection to the right */
+    transform-origin: left; /* Animate from the left edge */
+}
+
+.neuron::after {
+    right: 100%; /* Connection to the left */
+    transform-origin: right; /* Animate from the right edge */
+}
+
+@keyframes connect {
+    0% { transform: translateY(-50%) scaleX(0); } /* Start with zero width */
+    100% { transform: translateY(-50%) scaleX(1); } /* Expand to full width */
+}
+
+.neuron-1 {
+    animation-delay: 0.5s; /* Delay the animation for each neuron */
+}
+
+.neuron-2 {
+    animation-delay: 1s;
+}
+
+.neuron-3 {
+    animation-delay: 1.5s;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        background-color: lightblue; /* Change color during animation */
+        box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Add a glow effect */
+
+    }
+    100% {
+        transform: scale(1.2);
+        background-color: #74b9ff; /* Change color during animation */
+        box-shadow: 0 0 20px rgba(0, 0, 255, 0.8); /* Add a glow effect */
+    }
+}
+
